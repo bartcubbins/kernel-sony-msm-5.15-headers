@@ -9,6 +9,8 @@ LINUX_HEADERS="\
     linux/hdmi.h"
 
 UAPI_HEADERS="\
+    scsi/ufs/ufs.h\
+    scsi/ufs/ioctl.h\
     sound/compress_params.h\
     sound/compress_offload.h\
     sound/asound.h\
@@ -24,7 +26,6 @@ UAPI_HEADERS="\
     linux/fuse.h\
     linux/ipa_qmi_service_v01.h\
     linux/netlink.h\
-    linux/rmnet_data.h\
     linux/rmnet_ipa_fd_ioctl.h\
     linux/socket.h\
     linux/qseecom.h\
@@ -56,7 +57,6 @@ TECHPACK_AUDIO_UAPI_HEADERS="\
     linux/msm_audio.h"
 
 TECHPACK_AUDIO_PACK_UAPI_HEADERS="\
-    wcd9320_registers.h\
     wcd9xxx_registers.h"
 
 TECHPACK_CAMERA_UAPI_HEADERS="\
