@@ -9,6 +9,8 @@ LINUX_HEADERS="\
     linux/hdmi.h"
 
 UAPI_HEADERS="\
+    scsi/ufs/ufs.h\
+    scsi/ufs/ioctl.h\
     sound/compress_params.h\
     sound/compress_offload.h\
     sound/asound.h\
@@ -24,14 +26,10 @@ UAPI_HEADERS="\
     linux/fuse.h\
     linux/ipa_qmi_service_v01.h\
     linux/netlink.h\
-    linux/msm_kgsl.h\
-    linux/msm_dsps.h\
-    linux/rmnet_data.h\
     linux/rmnet_ipa_fd_ioctl.h\
     linux/socket.h\
     linux/qseecom.h\
     linux/spcom.h\
-    linux/smcinvoke.h\
     linux/v4l2-common.h\
     linux/v4l2-controls.h\
     linux/v4l2-mediabus.h\
@@ -59,7 +57,6 @@ TECHPACK_AUDIO_UAPI_HEADERS="\
     linux/msm_audio.h"
 
 TECHPACK_AUDIO_PACK_UAPI_HEADERS="\
-    wcd9320_registers.h\
     wcd9xxx_registers.h"
 
 TECHPACK_CAMERA_UAPI_HEADERS="\
@@ -98,6 +95,12 @@ TECHPACK_DISPLAY_UAPI_HEADERS="\
     display/media/mmm_color_fmt.h\
     display/drm/msm_drm_pp.h\
     display/drm/sde_drm.h"
+
+TECHPACK_GRAPHICS_UAPI_HEADERS="\
+    linux/msm_kgsl.h"
+
+TECHPACK_SECUREMSM_UAPI_HEADERS="\
+    linux/smcinvoke.h"
 
 TECHPACK_VIDEO_UAPI_HEADERS="\
     msm_media_info.h"
@@ -139,6 +142,16 @@ done
 
 for x in $TECHPACK_DISPLAY_UAPI_HEADERS; do \
 cp $HEADER_SRC/"../techpack/display/include/uapi/"$x $HEADER_ORI/$x
+$CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.15.log
+done
+
+for x in $TECHPACK_GRAPHICS_UAPI_HEADERS; do \
+cp $HEADER_SRC/"../techpack/graphics/include/uapi/"$x $HEADER_ORI/$x
+$CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.15.log
+done
+
+for x in $TECHPACK_SECUREMSM_UAPI_HEADERS; do \
+cp $HEADER_SRC/"../techpack/securemsm/"$x $HEADER_ORI/$x
 $CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.15.log
 done
 
