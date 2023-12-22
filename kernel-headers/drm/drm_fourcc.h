@@ -121,6 +121,7 @@ extern "C" {
 #define DRM_FORMAT_P010 fourcc_code('P', '0', '1', '0')
 #define DRM_FORMAT_P012 fourcc_code('P', '0', '1', '2')
 #define DRM_FORMAT_P016 fourcc_code('P', '0', '1', '6')
+#define DRM_FORMAT_P030 fourcc_code('P', '0', '3', '0')
 #define DRM_FORMAT_Q410 fourcc_code('Q', '4', '1', '0')
 #define DRM_FORMAT_Q401 fourcc_code('Q', '4', '0', '1')
 #define DRM_FORMAT_YUV410 fourcc_code('Y', 'U', 'V', '9')
@@ -266,9 +267,9 @@ extern "C" {
 #define AMD_FMT_MOD_RB_MASK 0x7
 #define AMD_FMT_MOD_PIPE_SHIFT 33
 #define AMD_FMT_MOD_PIPE_MASK 0x7
-#define AMD_FMT_MOD_SET(field,value) ((uint64_t) (value) << AMD_FMT_MOD_ ##field ##_SHIFT)
+#define AMD_FMT_MOD_SET(field,value) ((__u64) (value) << AMD_FMT_MOD_ ##field ##_SHIFT)
 #define AMD_FMT_MOD_GET(field,value) (((value) >> AMD_FMT_MOD_ ##field ##_SHIFT) & AMD_FMT_MOD_ ##field ##_MASK)
-#define AMD_FMT_MOD_CLEAR(field) (~((uint64_t) AMD_FMT_MOD_ ##field ##_MASK << AMD_FMT_MOD_ ##field ##_SHIFT))
+#define AMD_FMT_MOD_CLEAR(field) (~((__u64) AMD_FMT_MOD_ ##field ##_MASK << AMD_FMT_MOD_ ##field ##_SHIFT))
 #ifdef __cplusplus
 }
 #endif

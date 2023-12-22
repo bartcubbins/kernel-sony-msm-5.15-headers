@@ -56,10 +56,18 @@
 #define CAM_ISP_TFE_PACKET_META_REG_DUMP_PER_REQUEST 6
 #define CAM_ISP_TFE_PACKET_META_REG_DUMP_ON_FLUSH 7
 #define CAM_ISP_TFE_PACKET_META_REG_DUMP_ON_ERROR 8
+#define CAM_ISP_TFE_PACKET_META_GENERIC_BLOB_LEFT 9
+#define CAM_ISP_TFE_PACKET_META_GENERIC_BLOB_RIGHT 10
 #define CAM_ISP_TFE_GENERIC_BLOB_TYPE_HFR_CONFIG 0
 #define CAM_ISP_TFE_GENERIC_BLOB_TYPE_CLOCK_CONFIG 1
 #define CAM_ISP_TFE_GENERIC_BLOB_TYPE_BW_CONFIG_V2 2
 #define CAM_ISP_TFE_GENERIC_BLOB_TYPE_CSID_CLOCK_CONFIG 3
+#define CAM_ISP_TFE_GENERIC_BLOB_TYPE_INIT_CONFIG 4
+#define CAM_ISP_TFE_GENERIC_BLOB_TYPE_DYNAMIC_MODE_SWITCH 15
+#define CAM_ISP_TFE_GENERIC_BLOB_TYPE_BW_LIMITER_CFG 16
+#define CAM_ISP_TFE_GENERIC_BLOB_TYPE_ALIGNMENT_OFFSET_INFO 17
+#define CAM_ISP_TFE_GENERIC_BLOB_TYPE_UPDATE_OUT_RES 18
+#define CAM_ISP_TFE_GENERIC_BLOB_TYPE_DISCARD_INITIAL_FRAMES 19
 #define CAM_ISP_TFE_DSP_MODE_NONE 0
 #define CAM_ISP_TFE_DSP_MODE_ONE_WAY 1
 #define CAM_ISP_TFE_DSP_MODE_ROUND 2
@@ -73,6 +81,8 @@
 #define CAM_ISP_TFE_VC_DT_CFG 2
 #define CAM_ISP_TFE_FLAG_QCFA_BIN BIT(0)
 #define CAM_ISP_TFE_FLAG_BAYER_BIN BIT(1)
+#define CAM_ISP_TFE_FLAG_SHDR_MASTER_EN BIT(2)
+#define CAM_ISP_TFE_FLAG_SHDR_SLAVE_EN BIT(3)
 struct cam_isp_tfe_dev_cap_info {
   __u32 hw_type;
   __u32 reserved;
@@ -84,6 +94,13 @@ struct cam_isp_tfe_query_cap_cmd {
   __s32 num_dev;
   __u32 reserved;
   struct cam_isp_tfe_dev_cap_info dev_caps[CAM_ISP_TFE_HW_MAX];
+};
+struct cam_isp_tfe_query_cap_cmd_v2 {
+  __u32 version;
+  __s32 num_dev;
+  struct cam_iommu_handle device_iommu;
+  struct cam_iommu_handle cdm_iommu;
+  struct cam_isp_tfe_dev_cap_info dev_caps[1];
 };
 struct cam_isp_tfe_out_port_info {
   __u32 res_id;
@@ -222,6 +239,44 @@ struct cam_isp_tfe_acquire_hw_info {
   __u32 input_info_offset;
   __u64 data;
 };
+struct cam_isp_tfe_wm_bw_limiter_config {
+  __u32 res_type;
+  __u32 enable_limiter;
+  __u32 counter_limit[CAM_PACKET_MAX_PLANES];
+};
+struct cam_isp_tfe_out_rsrc_bw_limiter_config {
+  __u32 version;
+  __u32 num_ports;
+  struct cam_isp_tfe_wm_bw_limiter_config bw_limiter_config[1];
+};
+struct cam_isp_tfe_alignment_offset_config {
+  __u32 resource_type;
+  __u32 x_offset;
+  __u32 y_offset;
+  __u32 width;
+  __u32 height;
+  __u32 stride;
+} __attribute__((packed));
+struct cam_isp_tfe_alignment_resource_info {
+  __u32 version;
+  __u32 num_ports;
+  struct cam_isp_tfe_alignment_offset_config port_alignment_cfg[1];
+} __attribute__((packed));
+struct cam_isp_tfe_wm_dimension_config {
+  __u32 res_id;
+  __u32 mode;
+  __u32 height;
+  __u32 width;
+};
+struct cam_isp_tfe_out_resource_config {
+  __u32 num_ports;
+  __u32 reserved;
+  struct cam_isp_tfe_wm_dimension_config dimension_config[1];
+};
+struct cam_isp_tfe_discard_initial_frames {
+  __u32 version;
+  __u32 num_frames;
+} __attribute__((packed));
 #define CAM_TFE_ACQUIRE_COMMON_VER0 0x1000
 #define CAM_TFE_ACQUIRE_COMMON_SIZE_VER0 0x0
 #define CAM_TFE_ACQUIRE_INPUT_VER0 0x2000

@@ -25,6 +25,10 @@
 #define QMI_IPA_IPFLTR_NUM_IHL_RANGE_16_EQNS_V01 2
 #define QMI_IPA_MAX_FILTERS_V01 64
 #define QMI_IPA_IPFLTR_NUM_MEQ_128_EQNS_V01 2
+#define QMI_IPA_MAX_IPV4_ADD_LEN_V01 34
+#define QMI_IPA_MAX_IPV6_ADD_LEN_V01 35
+#define QMI_IPA_IPV6_WORD_ADDR_LEN_V01 4
+#define QMI_IPA_MAX_ETH_HDR_SIZE_V01 64
 #define QMI_IPA_ENDP_DESC_NUM_MAX_V01 31
 #define QMI_IPA_MAX_APN_V01 8
 #define QMI_IPA_MAX_CLIENT_DST_PIPES_V01 8
@@ -857,6 +861,88 @@ struct ipa_move_nat_table_complt_ind_msg_v01 {
   struct ipa_qmi_response_type_v01 nat_table_move_status;
 };
 #define QMI_IPA_NAT_TABLE_MOVE_COMPLETE_IND_MAX_MSG_LEN_V01 7
+struct ipa_wlan_opt_dp_rsrv_filter_req_msg_v01 {
+  __u8 num_filters;
+  __u32 timeout_val_ms;
+  __u32 q6_rtng_table_index;
+};
+#define IPA_WLAN_OPT_DP_RSRV_FILTER_REQ_MSG_V01_MAX_MSG_LEN 18
+struct ipa_wlan_opt_dp_rsrv_filter_resp_msg_v01 {
+  struct ipa_qmi_response_type_v01 resp;
+};
+#define IPA_WLAN_OPT_DP_RSRV_FILTER_RESP_MSG_V01_MAX_MSG_LEN 7
+struct ipa_wlan_opt_dp_rsrv_filter_complt_ind_msg_v01 {
+  struct ipa_qmi_response_type_v01 rsrv_filter_status;
+};
+#define IPA_WLAN_OPT_DP_RSRV_FILTER_COMPLT_IND_MSG_V01_MAX_MSG_LEN 7
+struct ip_hdr_v4_address_info_v01 {
+  __u32 source;
+  __u32 dest;
+};
+struct ip_hdr_v6_address_info_v01 {
+  __u32 source[QMI_IPA_IPV6_WORD_ADDR_LEN_V01];
+  __u32 dest[QMI_IPA_IPV6_WORD_ADDR_LEN_V01];
+};
+struct ipa_wlan_opt_dp_add_filter_req_msg_v01 {
+  __u32 filter_idx;
+  enum ipa_ip_type_enum_v01 ip_type;
+  __u8 v4_addr_valid;
+  struct ip_hdr_v4_address_info_v01 v4_addr;
+  __u8 v6_addr_valid;
+  struct ip_hdr_v6_address_info_v01 v6_addr;
+};
+#define IPA_WLAN_OPT_DP_ADD_FILTER_REQ_MSG_V01_MAX_MSG_LEN 60
+struct ipa_wlan_opt_dp_add_filter_resp_msg_v01 {
+  struct ipa_qmi_response_type_v01 resp;
+};
+#define IPA_WLAN_OPT_DP_ADD_FILTER_RESP_MSG_V01_MAX_MSG_LEN 7
+struct ipa_wlan_opt_dp_add_filter_complt_ind_msg_v01 {
+  struct ipa_qmi_response_type_v01 filter_add_status;
+  __u32 filter_idx;
+  __u8 filter_handle_valid;
+  __u32 filter_handle;
+};
+#define IPA_WLAN_OPT_DP_ADD_FILTER_COMPLT_IND_MSG_V01_MAX_MSG_LEN 21
+struct ipa_wlan_opt_dp_remove_filter_req_msg_v01 {
+  __u32 filter_idx;
+  __u32 filter_handle;
+};
+#define IPA_WLAN_OPT_DP_REMOVE_FILTER_REQ_MSG_V01_MAX_MSG_LEN 14
+struct ipa_wlan_opt_dp_remove_filter_resp_msg_v01 {
+  struct ipa_qmi_response_type_v01 resp;
+};
+#define IPA_WLAN_OPT_DP_REMOVE_FILTER_RESP_MSG_V01_MAX_MSG_LEN 7
+struct ipa_wlan_opt_dp_remove_filter_complt_ind_msg_v01 {
+  struct ipa_qmi_response_type_v01 filter_removal_status;
+  __u32 filter_idx;
+};
+#define IPA_WLAN_OPT_DP_REM_FILTER_COMPLT_IND_MSG_V01_MAX_MSG_LEN 14
+struct ipa_wlan_opt_dp_remove_all_filter_req_msg_v01 {
+  __u8 reserved_valid;
+  __u8 reserved;
+};
+#define IPA_WLAN_OPT_DP_REM_ALL_FILTER_REQ_MSG_V01_MAX_MSG_LEN 4
+struct ipa_wlan_opt_dp_remove_all_filter_resp_msg_v01 {
+  struct ipa_qmi_response_type_v01 resp;
+};
+#define IPA_WLAN_OPT_DP_REMOVE_ALL_FILTER_RESP_MSG_V01_MAX_MSG_LEN 7
+struct ipa_wlan_opt_dp_remove_all_filter_complt_ind_msg_v01 {
+  struct ipa_qmi_response_type_v01 filter_removal_all_status;
+};
+#define IPA_WLAN_OPT_DP_REM_ALL_FILTER_COMPLT_IND_MSG_V01_MAX_MSG_LEN 7
+struct ipa_wlan_opt_dp_set_wlan_per_info_req_msg_v01 {
+  __u32 src_wlan_endp_id;
+  __u32 dest_wlan_endp_id;
+  __u32 dest_apps_endp_id;
+  __u32 hdr_len;
+  __u32 eth_hdr_offset;
+  __u8 hdr_info[QMI_IPA_MAX_ETH_HDR_SIZE_V01];
+};
+#define IPA_WLAN_OPT_DP_SET_WLAN_PER_INFO_REQ_MSG_V1_MAX_MSG_LEN 102
+struct ipa_wlan_opt_dp_set_wlan_per_info_resp_msg_v01 {
+  struct ipa_qmi_response_type_v01 resp;
+};
+#define IPA_WLAN_OPT_DP_SET_WLAN_PER_INFO_RESP_MSG_V1_MAX_MSG_LEN 7
 #define QMI_IPA_INDICATION_REGISTER_REQ_V01 0x0020
 #define QMI_IPA_INDICATION_REGISTER_RESP_V01 0x0020
 #define QMI_IPA_INIT_MODEM_DRIVER_REQ_V01 0x0021
@@ -914,6 +1000,20 @@ struct ipa_move_nat_table_complt_ind_msg_v01 {
 #define QMI_IPA_MOVE_NAT_REQ_V01 0x0046
 #define QMI_IPA_MOVE_NAT_RESP_V01 0x0046
 #define QMI_IPA_MOVE_NAT_COMPLETE_IND_V01 0x0046
+#define QMI_IPA_WLAN_OPT_DATAPATH_RSRV_FILTER_REQ_V01 0x0049
+#define QMI_IPA_WLAN_OPT_DATAPATH_RSRV_FILTER_RESP_V01 0x0049
+#define QMI_IPA_WLAN_OPT_DATAPATH_RSRV_FILTER_COMPLT_IND_V01 0x0049
+#define QMI_IPA_WLAN_OPT_DATAPATH_ADD_FILTER_REQ_V01 0x004A
+#define QMI_IPA_WLAN_OPT_DATAPATH_ADD_FILTER_RESP_V01 0x004A
+#define QMI_IPA_WLAN_OPT_DATAPATH_ADD_FILTER_COMPLT_IND_V01 0x004A
+#define QMI_IPA_WLAN_OPT_DATAPATH_REMOVE_FILTER_REQ_V01 0x004B
+#define QMI_IPA_WLAN_OPT_DATAPATH_REMOVE_FILTER_RESP_V01 0x004B
+#define QMI_IPA_WLAN_OPT_DATAPATH_REMOVE_FILTER_COMPLT_IND_V01 0x004B
+#define QMI_IPA_WLAN_OPT_DATAPATH_REMOVE_ALL_FILTER_REQ_V01 0x004C
+#define QMI_IPA_WLAN_OPT_DATAPATH_REMOVE_ALL_FILTER_RESP_V01 0x004C
+#define QMI_IPA_WLAN_OPT_DATAPATH_REMOVE_ALL_FILTER_COMPLT_IND_V01 0x004C
+#define QMI_IPA_WLAN_OPT_DATAPATH_SET_WLAN_PER_INFO_REQ_V01 0x004D
+#define QMI_IPA_WLAN_OPT_DATAPATH_SET_WLAN_PER_INFO_RESP_V01 0x004D
 #define QMI_IPA_INIT_MODEM_DRIVER_REQ_MAX_MSG_LEN_V01 197
 #define QMI_IPA_INIT_MODEM_DRIVER_RESP_MAX_MSG_LEN_V01 25
 #define QMI_IPA_INDICATION_REGISTER_REQ_MAX_MSG_LEN_V01 16

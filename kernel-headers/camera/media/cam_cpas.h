@@ -68,6 +68,11 @@
 #define CAM_CPAS_FUSES_MAX 32
 #define CAM_CPAS_VOTE_LEVEL_HIGH 1
 #define CAM_CPAS_VOTE_LEVEL_LOW 2
+#define CAM_SYSFS_SUBPARTS_INFO_FILENAME "subparts_info"
+#define CAM_SYSFS_IFE_HW_IDX 0
+#define CAM_SYSFS_IFE_LITE_HW_IDX 1
+#define CAM_SYSFS_SFE_HW_IDX 2
+#define CAM_SYSFS_CUSTOM_HW_IDX 3
 struct cam_cpas_fuse_value {
   __u32 fuse_id;
   __u32 fuse_val;

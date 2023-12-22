@@ -26,6 +26,7 @@ UAPI_HEADERS="\
     linux/fuse.h\
     linux/ipa_qmi_service_v01.h\
     linux/netlink.h\
+    linux/rmnet_data.h\
     linux/rmnet_ipa_fd_ioctl.h\
     linux/socket.h\
     linux/qseecom.h\

@@ -37,6 +37,7 @@
 #define CAM_SENSOR_PACKET_I2C_COMMANDS 0
 #define CAM_SENSOR_PACKET_GENERIC_BLOB 1
 #define CAM_SENSOR_GENERIC_BLOB_RES_INFO 0
+#define CAM_SENSOR_GET_QUERY_CAP_V2
 enum camera_sensor_cmd_type {
   CAMERA_SENSOR_CMD_TYPE_INVALID,
   CAMERA_SENSOR_CMD_TYPE_PROBE,
@@ -108,6 +109,7 @@ enum cam_sensor_packet_opcodes {
   CAM_SENSOR_PACKET_OPCODE_SENSOR_PROBE_V2,
   CAM_SENSOR_PACKET_OPCODE_SENSOR_REG_BANK_UNLOCK,
   CAM_SENSOR_PACKET_OPCODE_SENSOR_REG_BANK_LOCK,
+  CAM_SENSOR_PACKET_OPCODE_SENSOR_BUBBLE_UPDATE,
   CAM_SENSOR_PACKET_OPCODE_SENSOR_NOP = 127,
 };
 enum tpg_command_type_t {
@@ -217,6 +219,14 @@ struct cam_cmd_i2c_info {
   __u8 cmd_type;
   __u16 reserved;
 } __attribute__((packed));
+#define CAM_SENSOR_FEATURE_MASK BIT(0)
+#define CAM_SENSOR_NUM_BATCHED_FRAMES BIT(1)
+#define CAM_SENSOR_FEATURE_NONE 0
+#define CAM_SENSOR_FEATURE_AEB_ON BIT(0)
+#define CAM_SENSOR_FEATURE_AEB_UPDATE BIT(1)
+#define CAM_SENSOR_FEATURE_AEB_OFF BIT(2)
+#define CAM_SENSOR_FEATURE_INSENSOR_HDR_3EXP_ON BIT(3)
+#define CAM_SENSOR_FEATURE_INSENSOR_HDR_3EXP_OFF BIT(4)
 struct cam_sensor_res_info {
   __u16 res_index;
   __u32 fps;
@@ -474,4 +484,16 @@ struct cam_flash_query_cap_info {
   __u32 max_duration_flash[CAM_FLASH_MAX_LED_TRIGGERS];
   __u32 max_current_torch[CAM_FLASH_MAX_LED_TRIGGERS];
 } __attribute__((packed));
+struct cam_flash_query_cap_info_v2 {
+  __u32 version;
+  __u32 slot_info;
+  __u32 max_current_flash[CAM_FLASH_MAX_LED_TRIGGERS];
+  __u32 max_duration_flash[CAM_FLASH_MAX_LED_TRIGGERS];
+  __u32 max_current_torch[CAM_FLASH_MAX_LED_TRIGGERS];
+  __u32 flash_type;
+  __u32 num_valid_params;
+  __u32 param_mask;
+  __u32 params[3];
+} __attribute__((packed));
+#define VIDIOC_MSM_CCI_CFG _IOWR('V', BASE_VIDIOC_PRIVATE + 23, struct cam_cci_ctrl)
 #endif
