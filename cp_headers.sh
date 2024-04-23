@@ -61,6 +61,7 @@ TECHPACK_AUDIO_PACK_UAPI_HEADERS="\
     wcd9xxx_registers.h"
 
 TECHPACK_CAMERA_UAPI_HEADERS="\
+    camera/media/cam_cre.h\
     camera/media/cam_cpas.h\
     camera/media/cam_custom.h\
     camera/media/cam_defs.h\
