@@ -49,16 +49,8 @@ TECHPACK_AUDIO_UAPI_HEADERS="\
     sound/msmcal-hwdep.h\
     sound/voice_params.h\
     sound/wcd-dsp-glink.h\
-    linux/msm_audio_calibration.h\
-    linux/msm_audio_wmapro.h\
-    linux/msm_audio_amrwb.h\
-    linux/msm_audio_amrwbplus.h\
-    linux/msm_audio_wma.h\
-    linux/msm_audio_aac.h\
+    sound/audio_slimslave.h\
     linux/msm_audio.h"
-
-TECHPACK_AUDIO_PACK_UAPI_HEADERS="\
-    wcd9xxx_registers.h"
 
 TECHPACK_CAMERA_UAPI_HEADERS="\
     media/cam_cre.h\
@@ -129,11 +121,6 @@ done
 
 for x in $TECHPACK_AUDIO_UAPI_HEADERS; do \
 cp $HEADER_SRC/"../techpack/audio/include/uapi/audio/"$x $HEADER_ORI/$x
-$CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.15.log
-done
-
-for x in $TECHPACK_AUDIO_PACK_UAPI_HEADERS; do \
-cp $HEADER_SRC/"../techpack/audio/include/asoc/"$x $HEADER_ORI/audio/linux/mfd/wcd9xxx/$x
 $CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.15.log
 done
 
