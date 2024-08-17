@@ -159,7 +159,7 @@ done
 
 for x in $TECHPACK_VIDEO_UAPI_HEADERS; do \
 cp $HEADER_SRC/"../techpack/video/driver/vidc/inc/"$x $HEADER_ORI/media/$x
-$CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.15.log
+$CLEAN_HEADER -u -v -k $HEADER_ORI/media/ -d $HEADER_SAN/media/ $x &>>out/cp_headers_5.15.log
 done
 
 for x in $HEADER_OVERRIDES; do \
