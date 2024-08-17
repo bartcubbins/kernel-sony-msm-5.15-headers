@@ -9,58 +9,58 @@ LINUX_HEADERS="\
     linux/hdmi.h"
 
 UAPI_HEADERS="\
-    scsi/ufs/ufs.h\
-    scsi/ufs/ioctl.h\
-    sound/compress_params.h\
-    sound/compress_offload.h\
+    asm-generic/ioctls.h\
+    drm/drm.h\
+    drm/drm_fourcc.h\
+    drm/drm_mode.h\
+    drm/msm_drm.h\
     sound/asound.h\
-    linux/ion.h\
-    linux/msm_ion.h\
-    linux/msm_ion_ids.h\
-    linux/v4l2-mediabus.h\
     linux/esoc_ctrl.h\
-    linux/msm_rmnet.h\
-    linux/msm_ipa.h\
-    linux/videodev2.h\
     linux/fb.h\
     linux/fuse.h\
+    linux/ion.h\
     linux/ipa_qmi_service_v01.h\
+    linux/msm_ion.h\
+    linux/msm_ion_ids.h\
+    linux/msm_ipa.h\
+    linux/msm_rmnet.h\
     linux/netlink.h\
+    linux/qseecom.h\
     linux/rmnet_data.h\
     linux/rmnet_ipa_fd_ioctl.h\
     linux/socket.h\
-    linux/qseecom.h\
     linux/spcom.h\
     linux/v4l2-common.h\
     linux/v4l2-controls.h\
     linux/v4l2-mediabus.h\
+    linux/videodev2.h\
     linux/mmc/ioctl.h\
-    drm/msm_drm.h\
-    drm/drm_fourcc.h\
-    drm/drm.h\
-    drm/drm_mode.h\
-    asm-generic/ioctls.h"
+    scsi/ufs/ioctl.h\
+    scsi/ufs/ufs.h\
+    sound/compress_offload.h\
+    sound/compress_params.h"
 
 TECHPACK_AUDIO_UAPI_HEADERS="\
+    linux/msm_audio.h\
     sound/audio_compressed_formats.h\
     sound/audio_effects.h\
-    sound/lsm_params.h\
+    sound/audio_slimslave.h\
     sound/devdep_params.h\
+    sound/lsm_params.h\
     sound/msmcal-hwdep.h\
     sound/voice_params.h\
-    sound/wcd-dsp-glink.h\
-    sound/audio_slimslave.h\
-    linux/msm_audio.h"
+    sound/wcd-dsp-glink.h"
 
 TECHPACK_CAMERA_UAPI_HEADERS="\
-    media/cam_cre.h\
     media/cam_cpas.h\
+    media/cam_cre.h\
     media/cam_custom.h\
     media/cam_defs.h\
     media/cam_fd.h\
     media/cam_icp.h\
     media/cam_isp.h\
     media/cam_isp_ife.h\
+    media/cam_isp_sfe.h\
     media/cam_isp_tfe.h\
     media/cam_isp_vfe.h\
     media/cam_jpeg.h\
@@ -69,26 +69,13 @@ TECHPACK_CAMERA_UAPI_HEADERS="\
     media/cam_req_mgr.h\
     media/cam_sensor.h\
     media/cam_sync.h\
-    media/cam_tfe.h\
-    media/cam_defs.h\
-    media/cam_sensor.h\
-    media/cam_isp.h\
-    media/cam_isp_ife.h\
-    media/cam_isp_sfe.h\
-    media/cam_isp_vfe.h\
-    media/cam_icp.h\
-    media/cam_cpas.h\
-    media/cam_fd.h\
-    media/cam_jpeg.h\
-    media/cam_lrme.h\
-    media/cam_req_mgr.h\
-    media/cam_sync.h"
+    media/cam_tfe.h"
 
 TECHPACK_DISPLAY_UAPI_HEADERS="\
-    display/media/msm_sde_rotator.h\
-    display/media/mmm_color_fmt.h\
     display/drm/msm_drm_pp.h\
-    display/drm/sde_drm.h"
+    display/drm/sde_drm.h\
+    display/media/mmm_color_fmt.h\
+    display/media/msm_sde_rotator.h"
 
 TECHPACK_GRAPHICS_UAPI_HEADERS="\
     linux/msm_kgsl.h"
@@ -100,9 +87,9 @@ TECHPACK_VIDEO_UAPI_HEADERS="\
     msm_media_info.h"
 
 HEADER_OVERRIDES="\
+    display/media/mmm_color_fmt.h\
     linux/socket.h\
-    media/msm_media_info.h\
-    display/media/mmm_color_fmt.h"
+    media/msm_media_info.h"
 
 cd ../../../..
 
