@@ -36,8 +36,6 @@ UAPI_HEADERS="\
     linux/videodev2.h\
     linux/mmc/ioctl.h\
     misc/adsp_sleepmon.h\
-    scsi/ufs/ioctl.h\
-    scsi/ufs/ufs.h\
     sound/compress_offload.h\
     sound/compress_params.h"
 
